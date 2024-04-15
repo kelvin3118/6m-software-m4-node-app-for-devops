@@ -5,15 +5,16 @@ orbs:
   docker: circleci/docker@2.1.4
 # jobs - set of instructions / functions
 jobs:
-  build: # job name
-    docker: # environment
+  build:
+    docker:
       - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
-        pkg-manager: npm
+          pkg-manager: npm
       - run: |
-        npm install
+          echo "Installing dependencies..."
+          npm install
   test:
     docker:
       - image: cimg/node:16.10
