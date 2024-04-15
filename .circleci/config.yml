@@ -25,6 +25,19 @@ jobs:
       - run: |
           echo "Running tests..."
           npm run test
+  publish:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - run:
+          name: Build Docker image
+          command: docker build -t eda042750651 .
+      - docker/push:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+          repository: kelvin3118/education-space
+          tag: latest
 
 # workflow - defines what sequence the jobs will run
 workflows:
@@ -34,3 +47,6 @@ workflows:
       - test:
           requires: # added build job requirement for test job
             - build
+      - publish:
+          requires:
+            - test
