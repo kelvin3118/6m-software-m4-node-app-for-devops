@@ -5,26 +5,25 @@ orbs:
   docker: circleci/docker@2.1.4
 # jobs - set of instructions / functions
 jobs:
-  build:
-    docker:
+  build: # job name
+    docker: # environment
       - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
-          pkg-manager: npm
+        pkg-manager: npm
       - run: |
-          echo "Installing dependencies..."
-          npm install
+        npm install
   test:
     docker:
       - image: cimg/node:16.10
     steps:
       - checkout
       - node/install-packages:
-          pkg-manager: npm
+        pkg-manager: npm
       - run: |
-          echo "Running tests..."
-          npm run test
+        echo "Running tests..."
+        npm run test
 
 # workflow - defines what sequence the jobs will run
 workflows:
