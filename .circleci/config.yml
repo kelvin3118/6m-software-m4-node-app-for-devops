@@ -28,14 +28,15 @@ jobs:
   publish:
     docker:
       - image: cimg/node:16.10
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run:
           name: Build Docker image
           command: docker build -t eda042750651 .
-      - docker/push:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
+      - run: |
           repository: kelvin3118/education-space
           tag: latest
           image: eda042750651
