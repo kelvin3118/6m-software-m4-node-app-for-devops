@@ -34,11 +34,11 @@ jobs:
           name: Build Docker image
           command: docker build -t eda042750651 .
       - docker/push:
-          image: eda042750651 # Docker image identifier
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
           repository: kelvin3118/education-space
           tag: latest
+          image: eda042750651
 
 # workflow - defines what sequence the jobs will run
 workflows:
