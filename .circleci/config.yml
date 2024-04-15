@@ -20,11 +20,11 @@ jobs:
       - image: cimg/node:16.10
     steps:
       - checkout
-      -node/install-packages:
-        pkg-manager: npm
-      -run: |
-        echo "Running tests..."
-        npm run test
+      - node/install-packages:
+          pkg-manager: npm
+      - run: |
+          echo "Running tests..."
+          npm run test
 
 # workflow - defines what sequence the jobs will run
 workflows:
