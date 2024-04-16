@@ -35,6 +35,12 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Logout Docker
+          command: docker logout
+      - run:
+          name: Login Docker
+          command: docker login
+      - run:
           name: Build Docker image
           command: docker build -t "newsampleapp" .
       - run:
