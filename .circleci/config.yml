@@ -38,6 +38,9 @@ jobs:
           name: Build Docker image
           command: docker build -t "newsampleapp" .
       - run:
+          name: Tag Docker image
+          command: docker tag newsampleapp:latest kelvin3118/education-space:latest
+      - run:
           name: Push Docker image
           command: docker push kelvin3118/education-space:latest
 
