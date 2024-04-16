@@ -48,10 +48,10 @@ jobs:
 workflows:
   simple_workflow: # workflow name
     jobs:
-      - build
-      - test:
-          requires: # added build job requirement for test job
-            - build
+      # - build
+      # - test:
+      #     requires: # added build job requirement for test job
+      #       - build
       - publish:
           requires:
             - test
