@@ -36,7 +36,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker tag latest kelvin3118/education-space:v1
+          command: docker tag eda042750651 kelvin3118/education-space:v1
       - run:
           name: Push Docker image
           command: docker push kelvin3118/education-space:latest
