@@ -39,7 +39,7 @@ jobs:
           command: docker logout
       - run:
           name: Login Docker
-          command: docker login
+          command: docker login -u username -p password
       - run:
           name: Build Docker image
           command: docker build -t "newsampleapp" .
