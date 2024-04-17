@@ -45,7 +45,7 @@ jobs:
           command: |
             docker build -t "newsampleapp" .
             docker tag newsampleapp:latest kelvin3118/education-space:latest
-            docker push kelvin3118/education-space:v1.0.1
+            docker push kelvin3118/education-space:latest
 
 # workflow - defines what sequence the jobs will run
 workflows:
