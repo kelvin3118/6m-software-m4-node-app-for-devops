@@ -44,7 +44,7 @@ jobs:
           name: build-and-push
           command: |
             docker build -t "newsampleapp" .
-            docker tag newsampleapp:v1.0.1 kelvin3118/education-space:v1.0.1
+            docker tag newsampleapp:v1.0.1 kelvin3118/education-space:latest
             docker push kelvin3118/education-space:v1.0.1
 
 # workflow - defines what sequence the jobs will run
