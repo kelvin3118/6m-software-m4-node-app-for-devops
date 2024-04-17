@@ -25,16 +25,27 @@ jobs:
       - run: |
           echo "Running tests..."
           npm run test
-  publish: #also known as build-and-push
-    executor: docker/docker #define the execution environment in which the steps of a job will run
+  publish:
+    docker:
+      - image: cimg/node:16.10
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
-      - docker/check
-      - docker/buid: #build the image
-          image: kelvin3118/education-space
-      - docker/push: #pushes the image to the specified account in the environment
-          image: kelvin3118/education-space
+      - run:
+          name: Logout Docker
+          command: docker logout
+      - run:
+          name: Login Docker
+          command: echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+      - run:
+          name: build-and-push
+          command: |
+            docker build -t "newsampleapp" .
+            docker tag newsampleapp:latest kelvin3118/education-space:latest
+            docker push kelvin3118/education-space:latest
 
 # workflow - defines what sequence the jobs will run
 workflows:
