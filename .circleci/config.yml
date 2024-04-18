@@ -1,12 +1,12 @@
 version: 2.1
-
+# orbs - reusable packages
 orbs:
   node: circleci/node@5.0.1
   docker: circleci/docker@2.1.4
-
+# jobs - set of instructions / functions
 jobs:
-  build:
-    docker:
+  build: # job name
+    docker: # environment
       - image: cimg/node:16.10
     steps:
       - checkout
@@ -15,7 +15,6 @@ jobs:
       - run: |
           echo "Installing dependencies..."
           npm install
-
   test:
     docker:
       - image: cimg/node:16.10
@@ -26,36 +25,35 @@ jobs:
       - run: |
           echo "Running tests..."
           npm run test
-
-  publish:
-    executor: docker/docker
+  publish: #also known as build-and-push
+    executor: docker/docker #define the execution environment in which the steps of a job will run
     steps:
       - checkout
       - setup_remote_docker
       - docker/check
-      - docker/build:
+      - docker/build: #build the image
           image: kelvin3118/education-space
           tag: v1.0.1
-      - docker/push:
+      - docker/push: #pushes the image to the specified account in the environment
           image: kelvin3118/education-space
           tag: v1.0.1
 
+# workflow - defines what sequence the jobs will run
 workflows:
-  simple_workflow:
+  simple_workflow: # workflow name
     jobs:
       - build
       - test:
-          requires:
+          requires: # added build job requirement for test job
             - build
+          filters:
+            branches:
+              only:
+                - main
       - publish:
           requires:
             - test
-
-      # Define the publish_release job
-      - publish_release:
           filters:
-            branches:
-              only: release
-          requires:
-            - build
-            - test
+            branchers:
+              only:
+                - release
