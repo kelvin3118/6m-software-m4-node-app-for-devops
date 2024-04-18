@@ -49,8 +49,6 @@ workflows:
       - publish:
           requires:
             - test
-          tags:
-            only: /^\d+\.\d+\.\d+$/
           filters:
             branches:
               only:
