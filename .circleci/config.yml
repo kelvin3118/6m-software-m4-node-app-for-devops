@@ -53,3 +53,5 @@ workflows:
             branches:
               only:
                 - release
+          tags:
+              only: /^\d+\.\d+\.\d+$/
