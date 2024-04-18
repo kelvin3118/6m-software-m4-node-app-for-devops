@@ -46,10 +46,6 @@ workflows:
       - test:
           requires: # added build job requirement for test job
             - build
-          filters:
-            branches:
-              only:
-                - main
       - publish:
           requires:
             - test
