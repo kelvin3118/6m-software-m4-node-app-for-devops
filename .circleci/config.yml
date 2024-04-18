@@ -49,3 +49,10 @@ workflows:
       - publish:
           requires:
             - test
+      - publish_release:
+          filters:
+            branches:
+              only: release
+          requires:
+            - build
+            - test
