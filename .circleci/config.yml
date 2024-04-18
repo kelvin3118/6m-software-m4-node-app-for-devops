@@ -54,4 +54,4 @@ workflows:
               only:
                 - release
           tags:
-              only: /^\d+\.\d+\.\d+$/
+            only: /^\d+\.\d+\.\d+$/
