@@ -44,7 +44,7 @@ workflows:
     jobs:
       - build
       - test:
-          requires: # added build job requirement for test job
+          requires: # added build job requirement for test jobs
             - build
       - publish:
           requires:
