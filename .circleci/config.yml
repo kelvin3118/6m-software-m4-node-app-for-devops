@@ -3,8 +3,21 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.1
   docker: circleci/docker@2.1.4
+  snyk: snyk/snyk@1.5.0
 # jobs - set of instructions / functions
 jobs:
+  scan:
+    docker:
+      - image: cimg/node:16.10
+    environment:
+      IMAGE_NAME: kelvin3118/education-space
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker/check
+      - run: docker build -t $IMAGE_NAME .
+      - snyk/scan:
+          docker-image-name: $IMAGE_NAME
   build: # job name
     docker: # environment
       - image: cimg/node:16.10
@@ -53,3 +66,9 @@ workflows:
             branches:
               only:
                 - release
+      - scan: # scan job
+          requires:
+            - build
+          filters:
+            branches:
+              only: release
