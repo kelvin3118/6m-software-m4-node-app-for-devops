@@ -55,20 +55,19 @@ jobs:
 workflows:
   simple_workflow: # workflow name
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: main
       - test:
           requires: # added build job requirement for test jobs
             - build
-      - publish:
-          requires:
-            - test
           filters:
             branches:
-              only:
-                - release
+              only: main
       - scan: # scan job
           requires:
             - build
           filters:
             branches:
-              only: release
+              only: main
