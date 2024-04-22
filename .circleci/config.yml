@@ -18,6 +18,7 @@ jobs:
       - run: docker build -t $IMAGE_NAME .
       - snyk/scan:
           docker-image-name: $IMAGE_NAME
+          severity-threshold: high
   build: # job name
     docker: # environment
       - image: cimg/node:16.10
@@ -71,6 +72,3 @@ workflows:
           filters:
             branches:
               only: main
-          steps:
-            - snyk/scan:
-                severity-threshold: high
