@@ -71,3 +71,6 @@ workflows:
           filters:
             branches:
               only: main
+          steps:
+            - snyk/scan:
+                severity-threshold: high
